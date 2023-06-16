@@ -16,8 +16,8 @@ frontend  auwal-frontend
         default_backend auwal-backend
 backend auwal-backend
         balance roundrobin
-        server 135568-web-01 54.197.123.59 check
-        server 135568-web-02 35.153.193.139 check
+        server 135568-web-01 100.27.14.19 check
+        server 135568-web-02 18.214.89.129 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
