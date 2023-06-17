@@ -10,14 +10,15 @@ apt-get -y install haproxy
 # edit config file
 server_config=\
 "
-frontend  auwal-frontend
-        bind *:80
-        mode http
-        default_backend auwal-backend
-backend auwal-backend
-        balance roundrobin
-        server 135568-web-01 100.27.14.1:9 check
-        server 135568-web-02 18.214.89.129 check
+frontend haproxy-main
+    bind *:80
+    option forwardfor  
+    default_backend apache_webservers    
+
+backend apache_webservers
+    balance roundrobin
+    server websvr1	100.27.14.19 check
+    server websvr2	18.214.89.129 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
